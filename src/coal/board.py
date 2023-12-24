@@ -1,7 +1,7 @@
 import numpy as np
 from copy import copy
 
-from .utils import position_to_algebraic, algebraic_to_position
+from .utils import algebraic_to_position
 
 
 class Board:
@@ -22,9 +22,13 @@ class Board:
         self.halfmove = 0
         self.fullmove = 1
         self.king_position = [None, None]
+        self.last = None
 
     def __repr__(self) -> str:
         return str(self.board)
+
+    def __hash__(self) -> int:
+        return hash(self.board.tobytes())
 
     def __getitem__(self, key):
         if isinstance(key, tuple) or isinstance(key, np.ndarray):

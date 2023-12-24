@@ -4,5 +4,6 @@ __pycache__/*
 
 tempCodeRunnerFile.py
 testing.ipynb
+testing.py
 *.DS_store
 *.egg-info

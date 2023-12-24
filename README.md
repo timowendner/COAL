@@ -1,4 +1,4 @@
-# COAL (chess opening analysis and learning)
+# COAL (Chess Opening Analysis and Learning)
 COAL chess is a tool to learn chess openings. 
 
 ## Setup

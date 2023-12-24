@@ -1,7 +1,5 @@
 import pygame
 import sys
-import os
-import numpy as np
 import pkg_resources
 
 from .board import Board
@@ -25,12 +23,11 @@ def start():
     pygame.display.set_caption("coal Chess")
     image_path = pkg_resources.resource_filename(__name__, 'img/pieces.png')
     piece_img = pygame.image.load(image_path)
-    mouse = Mouse()
+    mouse = Mouse(screen)
     board = Board()
     fen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
     # fen = 'rnbqkbnr/ppp2ppp/8/1B1Pp3/8/8/PPPP1PPP/RNBQK1NR b KQkq - 1 3'
     board.setup_fen(fen)
-    print(board.en_passant)
 
     while True:
         for event in pygame.event.get():
@@ -40,12 +37,12 @@ def start():
             elif event.type == pygame.VIDEORESIZE:
                 screen_size = event.size
             elif event.type == pygame.MOUSEBUTTONDOWN:
-                mouse.update(event.pos, True, screen_size)
+                mouse.update(event.pos, True)
             elif event.type == pygame.MOUSEBUTTONUP:
-                mouse.update(event.pos, False, screen_size)
+                mouse.update(event.pos, False)
 
         board = gamelogic(board, mouse)
-        render(board, screen, piece_img, screen_size, mouse)
+        render(board, screen, piece_img, mouse)
 
         pygame.display.flip()
         pygame.time.Clock().tick(60)

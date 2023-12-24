@@ -73,6 +73,7 @@ def move(board: Board, pos: np.ndarray, to: np.ndarray) -> Board:
 
     board = simulate(board, pos, to)
     board.check = is_in_check(board)
+    board.last = (pos, to)
     return board
 
 
@@ -86,7 +87,6 @@ def get_possible_moves(board: Board, pos: np.ndarray) -> set[tuple[int]]:
         king = new_board.king_position[max(0, new_board.active)]
         if piece == 1 and np.max(np.abs(pos - to)) > 1:
             direction = np.sign(pos[1] - to[1])
-            print((pos[0], pos[1] - direction), )
             if (pos[0], pos[1] - direction) in attacks or board.check is not None:
                 continue
         if king not in attacks:
