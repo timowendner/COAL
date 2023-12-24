@@ -15,13 +15,13 @@ def gamelogic(board: Board, mouse: Mouse) -> Board:
     return board
 
 
-def main():
+def start():
     pygame.init()
 
     screen_size = (800, 800)
     screen = pygame.display.set_mode(screen_size, pygame.RESIZABLE)
-    pygame.display.set_caption("Chess Opening Trainer")
-    piece_img = pygame.image.load("img/pieces.png")
+    pygame.display.set_caption("coal Chess")
+    piece_img = pygame.image.load("../../img/pieces.png")
     mouse = Mouse()
     board = Board()
     fen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
@@ -41,13 +41,15 @@ def main():
             elif event.type == pygame.MOUSEBUTTONUP:
                 mouse.update(event.pos, False, screen_size)
 
-        # print(board.current_king())
-        # print(mouse.toggle, mouse.last, mouse.cur)
         board = gamelogic(board, mouse)
         render(board, screen, piece_img, screen_size, mouse)
 
         pygame.display.flip()
         pygame.time.Clock().tick(60)
+
+
+def main():
+    start()
 
 
 if __name__ == '__main__':
