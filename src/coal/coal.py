@@ -1,6 +1,8 @@
 import pygame
 import sys
+import os
 import numpy as np
+import pkg_resources
 
 from .board import Board
 from .render import render, Mouse
@@ -21,11 +23,12 @@ def start():
     screen_size = (800, 800)
     screen = pygame.display.set_mode(screen_size, pygame.RESIZABLE)
     pygame.display.set_caption("coal Chess")
-    piece_img = pygame.image.load("../../img/pieces.png")
+    image_path = pkg_resources.resource_filename(__name__, 'img/pieces.png')
+    piece_img = pygame.image.load(image_path)
     mouse = Mouse()
     board = Board()
     fen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
-    fen = 'rnbqkbnr/ppp2ppp/8/1B1Pp3/8/8/PPPP1PPP/RNBQK1NR b KQkq - 1 3'
+    # fen = 'rnbqkbnr/ppp2ppp/8/1B1Pp3/8/8/PPPP1PPP/RNBQK1NR b KQkq - 1 3'
     board.setup_fen(fen)
     print(board.en_passant)
 
