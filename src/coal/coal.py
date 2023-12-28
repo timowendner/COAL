@@ -25,8 +25,8 @@ def start():
     piece_img = pygame.image.load(image_path)
     mouse = Mouse(screen)
     board = Board()
-    fen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
-    # fen = 'rnbqkbnr/ppp2ppp/8/1B1Pp3/8/8/PPPP1PPP/RNBQK1NR b KQkq - 1 3'
+    # fen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+    fen = 'rnbqkbnr/ppp2ppp/8/1B1Pp3/8/8/PPPP1PPP/RNBQK1NR b KQkq - 1 3'
     board.setup_fen(fen)
 
     while True:
@@ -34,8 +34,6 @@ def start():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            elif event.type == pygame.VIDEORESIZE:
-                screen_size = event.size
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 mouse.update(event.pos, True)
             elif event.type == pygame.MOUSEBUTTONUP:

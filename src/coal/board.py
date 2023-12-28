@@ -1,7 +1,7 @@
 import numpy as np
 from copy import copy
 
-from .utils import algebraic_to_position
+from .utils import algebraic_to_position, position_to_algebraic
 
 
 class Board:
@@ -81,3 +81,34 @@ class Board:
                     if piece == 1:
                         self.king_position[1 - max(0, color)] = (row, col)
                     col += 1
+
+    def get_fen(self) -> str:
+        mapping = ['k', 'q', 'b', 'n', 'r', 'p']
+        pieces = []
+        for row in self.board:
+            for piece in row:
+                if piece == 0 and pieces and pieces[-1].isnumeric():
+                    cur = int(pieces.pop())
+                    pieces.append(str(cur + 1))
+                elif piece == 0:
+                    pieces.append('1')
+                else:
+                    piece, color = abs(piece), np.sign(piece)
+                    piece = mapping[piece - 1]
+                    piece = piece.upper() if color == 1 else piece
+                    pieces.append(piece)
+            pieces.append('/')
+
+        pieces = ''.join(pieces)
+        active = 'w' if self.active == 1 else 'b'
+        en_passant = position_to_algebraic(self.en_passant)
+        halfmove = str(self.halfmove)
+        fullmove = str(self.fullmove)
+
+        mapping = ['K', 'Q', 'k', 'q']
+        castle = ''.join([m for cr, m in zip(
+            self.castle_right, mapping) if cr]
+        )
+        castle = '-' if not castle else castle
+
+        return ' '.join([pieces, active, castle, en_passant, halfmove, fullmove])

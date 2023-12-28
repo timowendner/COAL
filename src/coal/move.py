@@ -36,10 +36,10 @@ def simulate(board: Board, pos: np.ndarray, to: np.ndarray) -> Board:
 
     # castle right
     board.castle_right &= ~np.array([
-        np.all(pos == (7, 4)) or np.all(pos == (7, 7)),
-        np.all(pos == (7, 4)) or np.all(pos == (7, 0)),
-        np.all(pos == (0, 4)) or np.all(pos == (0, 7)),
-        np.all(pos == (0, 4)) or np.all(pos == (0, 0))
+        np.all(pos == (7, 4)) or np.all(pos == (7, 7)) or np.all(to == (7, 7)),
+        np.all(pos == (7, 4)) or np.all(pos == (7, 0)) or np.all(to == (7, 0)),
+        np.all(pos == (0, 4)) or np.all(pos == (0, 7)) or np.all(to == (0, 7)),
+        np.all(pos == (0, 4)) or np.all(pos == (0, 0)) or np.all(to == (0, 0))
     ])
 
     # castling

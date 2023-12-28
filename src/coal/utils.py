@@ -3,6 +3,8 @@ from pygame import Surface
 
 
 def position_to_algebraic(pos: np.ndarray) -> str:
+    if pos is None:
+        return '-'
     x, y = pos
     return chr(y+97) + str(7 - x)
 
