@@ -32,7 +32,7 @@ def coordinates_to_position(screen: Surface, cord: tuple[int]):
     return pos[::-1]
 
 
-def position_to_coordinates(screen: Surface, pos: np.ndarray, ) -> tuple[np.ndarray, int]:
+def position_to_coordinates(screen: Surface, pos: np.ndarray) -> tuple[np.ndarray, int]:
     size, step, offset = calculate_sizes(screen)
     cord = np.array(pos[::-1])*step + offset
     return cord, step
