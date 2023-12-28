@@ -6,11 +6,7 @@ from .utils import algebraic_to_position, position_to_algebraic
 
 class Board:
     def __init__(self, state: dict = None) -> None:
-        if state is not None:
-            for name, value in state.items():
-                setattr(self, name, copy(value))
-        else:
-            self.clear()
+        self.clear()
 
     def clear(self) -> None:
         if hasattr(self, 'check'):
@@ -23,6 +19,12 @@ class Board:
         self.fullmove = 1
         self.king_position = [None, None]
         self.last = None
+
+    def copy(self) -> 'Board':
+        board = Board()
+        for name, value in vars(self).items():
+            setattr(board, name, copy(value))
+        return board
 
     def __repr__(self) -> str:
         return str(self.board)

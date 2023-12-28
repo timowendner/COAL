@@ -5,7 +5,7 @@ from .pieces import get_moves, get_all_attacks
 
 
 def simulate(board: Board, pos: np.ndarray, to: np.ndarray) -> Board:
-    board = Board(vars(board))
+    board = board.copy()
     piece = board[pos]
     piece, color = abs(piece), np.sign(piece)
 
