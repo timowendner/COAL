@@ -26,6 +26,11 @@ class Board:
             setattr(board, name, copy(value))
         return board
 
+    def get_starting_position(self):
+        fen = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+        self.setup_fen(fen)
+        return self
+
     def __repr__(self) -> str:
         return str(self.board)
 

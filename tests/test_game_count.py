@@ -1,1 +1,0 @@
-from COAL import COAL

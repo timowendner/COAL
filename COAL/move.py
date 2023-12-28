@@ -1,4 +1,5 @@
 import numpy as np
+from itertools import product
 
 from .board import Board
 from .pieces import get_moves, get_all_attacks
